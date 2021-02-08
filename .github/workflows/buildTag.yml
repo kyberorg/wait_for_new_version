@@ -24,9 +24,6 @@ jobs:
           username: ${{ secrets.HUB_USERNAME }}
           password: ${{ secrets.HUB_PASSWORD }}
 
-      - name: Build Image
-        run: JAVA_HOME=/opt/graalvm mvn clean package
-
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
