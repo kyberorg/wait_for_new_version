@@ -36,6 +36,6 @@ with:
   responseCode: 200
   timeout: 20
   interval: 0.5
-  hasActuator: false
+  hasActuator: true
   commitSha: 9a9b9c
 ```

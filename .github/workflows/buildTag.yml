@@ -34,7 +34,7 @@ jobs:
           context: ./
           file: Dockerfile
           push: true
-          tags: kyberorg/hello-world-action:${{ steps.get_tag.outputs.tag }}
+          tags: kyberorg/wait4version-action:${{ steps.get_tag.outputs.tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

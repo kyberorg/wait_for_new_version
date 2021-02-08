@@ -32,13 +32,14 @@ inputs:
     default: ''
 outputs:
   result:
-    description: '0 if response code returned within timeout, 1- if not, 2 - system error, 3 - if params are not valid'
+    description: '0 if response code returned within timeout, 1 - if not, 2 - system error, 3 - if params are not valid'
 runs:
   using: 'docker'
-  image: 'kyberorg/hello-world-action:trunk'
+  image: 'kyberorg/wait4version-action:trunk'
   args:
     - ${{ inputs.url }}
     - ${{ inputs.responseCode }}
     - ${{ inputs.timeout }}
     - ${{ inputs.interval }}
+    - ${{ inputs.hasActuator }}
     - ${{ inputs.commitSha }}
