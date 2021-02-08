@@ -8,7 +8,6 @@ import kong.unirest.json.JSONException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.time.Instant;
 
 public class Application  {
@@ -41,13 +40,12 @@ public class Application  {
         }
 
         long timeoutInMilliSeconds = (long) timeout * MILLISECONDS_IN_SECOND;
-        long intervalInMilliSeconds = (long) interval * MILLISECONDS_IN_SECOND;
 
         Instant execTimeout = Instant.now().plusMillis(timeoutInMilliSeconds);
-        Duration pauseDuration = Duration.ofMillis(intervalInMilliSeconds);
 
         do {
             doCheck();
+            doPause();
         } while (Instant.now().isAfter(execTimeout));
         //Timeout reached
         System.exit(1);
@@ -94,6 +92,17 @@ public class Application  {
                 //all good - report success
                 System.exit(0);
             }
+        }
+
+    }
+
+    private static void doPause() {
+        // do pause
+        long pauseInMillis = (long) interval * MILLISECONDS_IN_SECOND;
+        try {
+            Thread.sleep(pauseInMillis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

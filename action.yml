@@ -35,7 +35,7 @@ outputs:
     description: '0 if response code returned within timeout, 1 - if not, 2 - system error, 3 - if params are not valid'
 runs:
   using: 'docker'
-  image: 'kyberorg/wait4version-action:trunk'
+  image: 'docker://kyberorg/wait4version-action:trunk'
   args:
     - ${{ inputs.url }}
     - ${{ inputs.responseCode }}

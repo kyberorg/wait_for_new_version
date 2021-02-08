@@ -30,7 +30,7 @@ Optional check for commit SHA of deployed version. This check is Spring Boot Act
 Has no effect when `hasActuator` set to false.
 ## Example usage
 ```
-uses: kyberorg/wait_for_new_version@v1.0.1
+uses: kyberorg/wait_for_new_version@v1.1
 with:
   url: 'http://localhost:8081'
   responseCode: 200
