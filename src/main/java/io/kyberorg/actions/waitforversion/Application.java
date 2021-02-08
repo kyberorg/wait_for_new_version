@@ -46,8 +46,9 @@ public class Application  {
         do {
             doCheck();
             doPause();
-        } while (Instant.now().isAfter(execTimeout));
+        } while (Instant.now().isBefore(execTimeout));
         //Timeout reached
+        System.err.println("All checks failed. Condition unmet. Timeout reached");
         System.exit(1);
     }
 
@@ -72,6 +73,8 @@ public class Application  {
                       String appCommitSha = responseFromActuator.getBody()
                               .getObject().getJSONObject("git").getJSONObject("commit").getString("id");
                       if(appCommitSha.equals(commitSha)) {
+                          System.out.printf("Check succeeded. Status: %s. Version: %s found. Condition met %n",
+                                  request.asEmpty().getStatus(), appCommitSha);
                           System.exit(0);
                       }
                     } catch (JSONException e) {
@@ -81,6 +84,8 @@ public class Application  {
                     try {
                         String status = responseFromActuator.getBody().getObject().getString("status");
                         if(status.equals("UP")) {
+                            System.out.printf("Check succeeded. Status: %s. Application is UP. Condition met %n",
+                                    request.asEmpty().getStatus());
                             System.exit(0);
                         }
                     } catch (JSONException e) {
@@ -90,14 +95,17 @@ public class Application  {
                 }
             } else {
                 //all good - report success
+                System.out.printf("Check succeeded. Status: %s. Application is UP. Condition met %n",
+                        request.asEmpty().getStatus());
                 System.exit(0);
             }
         }
-
+        System.out.printf("Check failed. Status: %s. Condition unmet %n", request.asEmpty().getStatus());
     }
 
     private static void doPause() {
         // do pause
+        System.out.printf("Pausing for %f seconds %n", interval);
         long pauseInMillis = (long) interval * MILLISECONDS_IN_SECOND;
         try {
             Thread.sleep(pauseInMillis);
@@ -117,7 +125,7 @@ public class Application  {
 
         try {
             responseCode = Integer.parseInt(args[1]);
-            if ((responseCode <= 200) || (responseCode >= 599)) {
+            if ((responseCode < 200) || (responseCode > 599)) {
                 System.err.printf("'%s' is not valid response code. Should be from 200 to 599", args[1]);
                 System.exit(3);
             }
