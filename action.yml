@@ -1,0 +1,44 @@
+# action.yml
+name: 'Wait for new version deployed'
+author: 'Aleksandr Muravja'
+branding:
+  icon: 'clock'
+  color: 'green'
+description: 'Makes GET requests to given server and check response status and optionally commit sha to detect if new version deployed.'
+inputs:
+  url:
+    description: 'The URL to poll. Should be without trailing slash'
+    required: false
+    default: 'http://localhost:8080'
+  responseCode:
+    description: 'Response code to wait for'
+    required: false
+    default: '200'
+  timeout:
+    description: 'Timeout in seconds'
+    required: false
+    default: '30'
+  interval:
+    description: 'Interval between polling in seconds'
+    required: false
+    default: '1'
+  hasActuator:
+    description: 'true - if application has Spring Boot Actuator enabled, else - false'
+    required: false
+    default: 'false'
+  commitSha:
+    description: 'Commit SHA of deployed version'
+    required: false
+    default: ''
+outputs:
+  result:
+    description: '0 if response code returned within timeout, 1- if not, 2 - system error, 3 - if params are not valid'
+runs:
+  using: 'docker'
+  image: 'kyberorg/hello-world-action:trunk'
+  args:
+    - ${{ inputs.url }}
+    - ${{ inputs.responseCode }}
+    - ${{ inputs.timeout }}
+    - ${{ inputs.interval }}
+    - ${{ inputs.commitSha }}

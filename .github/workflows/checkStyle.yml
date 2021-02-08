@@ -1,0 +1,22 @@
+name: "CheckStyle"
+
+on:
+  pull_request:
+    branches: [ trunk ]
+
+jobs:
+  checkStyle:
+    name: Check Code Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run java checkstyle
+        uses: nikitasavinov/checkstyle-action@0.3.1
+        with:
+          checkstyle_config: checkstyle.xml
+          reporter: 'github-pr-check'
+          tool_name: 'ReviewDog'
+          fail_on_error: true

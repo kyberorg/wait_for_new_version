@@ -1,0 +1,40 @@
+name: "Build Tag"
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  buildTag:
+    name: Build Tag
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get Latest Tag
+        id: get_tag
+        uses: WyriHaximus/github-action-get-previous-tag@1.0.0
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.HUB_USERNAME }}
+          password: ${{ secrets.HUB_PASSWORD }}
+
+      - name: Build Image
+        run: JAVA_HOME=/opt/graalvm mvn clean package
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: Dockerfile
+          push: true
+          tags: kyberorg/hello-world-action:${{ steps.get_tag.outputs.tag }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

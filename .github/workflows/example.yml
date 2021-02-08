@@ -1,0 +1,13 @@
+name: "Example Job"
+
+on: pull_request
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    name: Example Job
+    steps:
+      - name: Greet Kyberorg
+        uses: kyberorg/hello-world-github-action@v1
+        with:
+          name: 'kyberorg'
