@@ -120,6 +120,7 @@ public class Application  {
             new URL(url);
         } catch (MalformedURLException e) {
             System.err.printf("'%s' is not valid URL", url);
+            e.printStackTrace();
             System.exit(3);
         }
 
