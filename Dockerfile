@@ -31,5 +31,5 @@ COPY --from=build-aot /opt/graalvm/lib/libsunec.so /libsunec.so
 COPY --from=build-aot /opt/graalvm/lib/security/cacerts /cacerts
 
 COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh && chmod +x wait4version
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
