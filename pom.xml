@@ -5,7 +5,7 @@
 
 	<groupId>io.kyberorg.actions</groupId>
 	<artifactId>wait-for-new-version</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 
     <name>Wait For New Version GitHub Action</name>
 

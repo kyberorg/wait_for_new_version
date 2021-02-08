@@ -3,5 +3,5 @@ FROM alpine:latest
 WORKDIR /app
 COPY target/wait4version wait4version
 COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh && chmod +x hello-world
+RUN chmod +x entrypoint.sh && chmod +x wait4version
 ENTRYPOINT ["/app/entrypoint.sh"]
