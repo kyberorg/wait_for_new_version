@@ -1,2 +1,2 @@
 #!/bin/sh
-/app/wait4version $1 $2 $3 $4 $5 $6
+java -jar /app/wait4version.jar $1 $2 $3 $4 $5 $6

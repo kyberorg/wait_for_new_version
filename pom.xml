@@ -39,7 +39,7 @@
         <profile>
             <id>native</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <start.class>io.kyberorg.actions.waitforversion.Application</start.class>
