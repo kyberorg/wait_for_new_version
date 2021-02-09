@@ -100,7 +100,7 @@ public class Application  {
                 System.exit(0);
             }
         }
-        System.out.printf("Check failed. Status: %s. Condition unmet %n", request.asEmpty().getStatus());
+        System.out.printf("Check failed. Status: %s. Condition still unmet %n", request.asEmpty().getStatus());
     }
 
     private static void doPause() {

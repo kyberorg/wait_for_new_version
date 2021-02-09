@@ -64,6 +64,14 @@
                     <version>${graalvm.version}</version>
                     <scope>provided</scope>
                 </dependency>
+                <!-- Needed to prevent org.apache.commons.logging classNotFound errors -->
+                <dependency>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>commons-logging-jboss-logging</artifactId>
+                    <version>1.0.0.Final</version>
+                    <scope>runtime</scope>
+                </dependency>
+
             </dependencies>
             <build>
                 <plugins>
@@ -84,6 +92,8 @@
                             <imageName>${image.name}</imageName>
                             <mainClass>${start.class}</mainClass>
                             <buildArgs>--no-fallback --allow-incomplete-classpath
+                                --report-unsupported-elements-at-runtime
+                                -H:ReflectionConfigurationFiles=/reflect.json
                                 --enable-http --enable-https --enable-url-protocols=https
                                 --enable-all-security-services</buildArgs>
                         </configuration>

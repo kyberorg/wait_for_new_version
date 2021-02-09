@@ -14,6 +14,7 @@ ENV PATH=${JAVA_HOME}/bin:${PATH}
 
 COPY ./pom.xml ./pom.xml
 COPY src ./src/
+COPY reflect.json /reflect.json
 
 ENV MAVEN_OPTS='-Xmx10g'
 RUN mvn clean package
