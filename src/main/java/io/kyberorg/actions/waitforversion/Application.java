@@ -48,7 +48,7 @@ public class Application  {
             doPause();
         } while (Instant.now().isBefore(execTimeout));
         //Timeout reached
-        System.err.println("All checks failed. Condition unmet. Timeout reached");
+        System.err.println("Timeout reached. Condition unmet.");
         System.exit(1);
     }
 
