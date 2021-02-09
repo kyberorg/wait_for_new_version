@@ -83,7 +83,9 @@
                             <skip>false</skip>
                             <imageName>${image.name}</imageName>
                             <mainClass>${start.class}</mainClass>
-                            <buildArgs>--no-fallback --enable-url-protocols=https</buildArgs>
+                            <buildArgs>--no-fallback --allow-incomplete-classpath
+                                --enable-http --enable-https --enable-url-protocols=https
+                                --enable-all-security-services</buildArgs>
                         </configuration>
                     </plugin>
                 </plugins>
