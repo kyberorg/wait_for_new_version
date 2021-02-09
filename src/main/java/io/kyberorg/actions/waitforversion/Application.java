@@ -79,6 +79,8 @@ public class Application  {
                       }
                     } catch (JSONException e) {
                         System.err.println(e.getMessage());
+                    } catch (NullPointerException npe) {
+                        System.err.printf("Got malformed response from Endpoint. %s %n", npe.getMessage());
                     }
                 } else {
                     try {
@@ -90,6 +92,8 @@ public class Application  {
                         }
                     } catch (JSONException e) {
                         System.err.println(e.getMessage());
+                    } catch (NullPointerException npe) {
+                        System.err.printf("Got malformed response from Endpoint. %s %n", npe.getMessage());
                     }
 
                 }
@@ -105,7 +109,7 @@ public class Application  {
 
     private static void doPause() {
         // do pause
-        System.out.printf("Pausing for %f seconds %n", interval);
+        System.out.printf("Pausing for %.3f seconds %n", interval);
         long pauseInMillis = (long) interval * MILLISECONDS_IN_SECOND;
         try {
             Thread.sleep(pauseInMillis);
