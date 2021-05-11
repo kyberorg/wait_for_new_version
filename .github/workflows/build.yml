@@ -25,6 +25,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
+          network: host
           file: Dockerfile
           push: true
           tags: kyberorg/wait4version-action:trunk
