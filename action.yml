@@ -33,6 +33,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - shell: zsh
+    - shell: bash
       run: wait4version ${{ inputs.url }} ${{ inputs.responseCode }} {{ inputs.timeout }} ${{ inputs.interval }} ${{ inputs.hasActuator }} ${{ inputs.commitSha }}
 
