@@ -34,5 +34,5 @@ runs:
   using: 'composite'
   steps:
     - shell: bash
-      run: wait4version ${{ inputs.url }} ${{ inputs.responseCode }} {{ inputs.timeout }} ${{ inputs.interval }} ${{ inputs.hasActuator }} ${{ inputs.commitSha }}
+      run: wait4version ${{ inputs.url }} ${{ inputs.responseCode }} ${{ inputs.timeout }} ${{ inputs.interval }} ${{ inputs.hasActuator }} ${{ inputs.commitSha }}
 
