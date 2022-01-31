@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
-            <version>3.11.12</version>
+            <version>3.13.6</version>
         </dependency>
     </dependencies>
 
@@ -54,7 +54,7 @@
             </activation>
             <properties>
                 <start.class>io.kyberorg.actions.waitforversion.Application</start.class>
-                <graalvm.version>21.0.0</graalvm.version>
+                <graalvm.version>21.2.0</graalvm.version>
                 <image.name>wait4version</image.name>
             </properties>
             <dependencies>
