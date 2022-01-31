@@ -37,7 +37,6 @@ COPY --from=build-aot --chown=nonroot:nonroot /opt/graalvm/lib/libsunec.so /libs
 COPY --from=build-aot --chown=nonroot:nonroot /opt/graalvm/lib/security/cacerts /cacerts
 
 COPY --from=entrypointBuild --chown=nonroot:nonroot /go/bin/cmd /app/entrypoint
-RUN chmod +x /app/entrypoint
 
 USER nonroot:nonroot
 ENTRYPOINT ["/app/entrypoint"]
