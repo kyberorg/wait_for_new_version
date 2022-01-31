@@ -19,6 +19,12 @@ COPY reflect.json /reflect.json
 ENV MAVEN_OPTS='-Xmx10g'
 RUN mvn clean package
 
+FROM quay.io/kyberorg/golang:1.17.5 as entrypointBuild
+WORKDIR /go/src/app
+COPY cmd/entrypoint.go cmd/entrypoint.go
+
+RUN  GO111MODULE=off CGO_ENABLED=0 go install ./...
+
 # Create a minimal docker container and copy the app into it
 FROM gcr.io/distroless/static AS final
 WORKDIR /app
@@ -30,8 +36,8 @@ COPY --from=build-aot --chown=nonroot:nonroot target/wait4version /app/wait4vers
 COPY --from=build-aot --chown=nonroot:nonroot /opt/graalvm/lib/libsunec.so /libsunec.so
 COPY --from=build-aot --chown=nonroot:nonroot /opt/graalvm/lib/security/cacerts /cacerts
 
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY --from=entrypointBuild --chown=nonroot:nonroot /go/bin/cmd /app/entrypoint
+RUN chmod +x /app/entrypoint
 
 USER nonroot:nonroot
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint"]
